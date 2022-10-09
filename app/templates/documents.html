@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Documents</title>
+{% endblock %}
+
+{% block body %}
+
+<div align="center">
+    <div align="center" class="border">
+       <div class="header">
+          <h1 class="word">Upload Documents</h1>
+       </div>
+         
+        <div class="row g-3 justify-content-center ">
+            <div class="col-md-6">
+                <div>{{ msg }}</div>
+                <br/>
+                <form action="/upload" method="post" enctype="multipart/form-data">
+                    <input type="file" name="file">
+                    <input type="submit" value="upload">
+                </form>
+            </div>
+            {% if msg %}
+            <div class="col-6">
+                <a class="btn btn-primary" href="{{url_for('payment')}}" role="button">Proceed to Payment</a>
+            </div>
+
+            {% endif %}
+  
+
+        </div>
+    </div>
+    <div>
+      <a class="bottom" href="{{url_for('dashboard')}}">Back</a>
+    </div>
+</div>
+
+
+{% endblock %}
