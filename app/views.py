@@ -218,3 +218,8 @@ def admin_dashboard():
     cursor.execute("select admin_id,admin_name,email from admin where email=%s",(user, ))
     data= cursor.fetchone()
     return render_template('admin_dashboard.html',data=data)
+
+@app.route('/student_details')
+def student_details():
+    return render_template('student_details.html')
+    
