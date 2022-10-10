@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block head %}
-<title>Login</title>
+<title>Admin Login</title>
 {% endblock %}
 
 {% block body %}
@@ -10,10 +10,10 @@
     <div align="center" class="border">
         <div class="row g-3 justify-content-center ">
             <div class="col-md-6">
-                <h1 class="word">Student Login</h1>
+                <h1 class="word">Admin Login</h1>
                 <div>{{ msg }}</div>
                 <br/>
-                <form class="" action="{{ url_for('login') }}" method="POST">
+                <form class="" action="{{ url_for('admin_login') }}" method="POST">
                     <div class="col-6 text-start">
                         <label for="inputEmail4" class="form-label  ">Email</label>
                         <input type="text" class="form-control" id="inputEmail4" placeholder="email" name="email">
@@ -26,7 +26,7 @@
                         <button type="submit" class="btn btn-primary">Login</button>
                     </div>
                 </form>
-                <p class="bottom">Don't have an account?  <a class="bottom" href="{{url_for('register')}}"> Register </a></p>
+                <!-- <p class="bottom">Don't have an account?  <a class="bottom" href="{{url_for('register')}}"> Register </a></p> -->
             </div>
         </div>
     </div> 

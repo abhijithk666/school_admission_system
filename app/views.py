@@ -7,6 +7,7 @@ import MySQLdb.cursors
 import re, os
 from werkzeug.utils import secure_filename
 from werkzeug.exceptions import RequestEntityTooLarge
+from datetime import datetime
 
 app.config['SECRET_KEY'] = "my super secret key"
 
@@ -119,7 +120,19 @@ def upload():
             file.save(os.path.join(app.config['UPLOAD_DIRECTORY'],secure_filename(file.filename)))
             msg = 'File Uploaded Successfully !'
             # user=session['email']
+            if request.method == 'POST':
+                docname = request.form['idproof']
             
+            fname = os.path.splitext(file.filename)[0]
+            pathh = "~/Documents/VScode/Task3/uploads/"
+            url = pathh + fname
+            cursor=mysql.connection.cursor()
+            user=session['email']
+            cursor.execute("select stud_id from student where email=%s",(user, ))
+            data = cursor.fetchone()
+            studid = int(data[0])
+            cursor.execute('INSERT INTO documents(doc_name,url,stud_id) VALUES (% s, % s, % s )', (docname,url,studid))
+            mysql.connection.commit()
 
     except RequestEntityTooLarge:
         return 'File is larger than 16MB limit.'
@@ -130,3 +143,78 @@ def upload():
 def documents():
     return render_template('documents.html')
 
+@app.route('/feestructure')
+def feestructure():
+    return render_template('feestructure.html')
+
+@app.route('/payment_method')
+def payment_method():
+    cursor=mysql.connection.cursor()
+    user=session['email']
+    cursor.execute("select stud_id,class from student where email=%s",(user, ))
+    data = cursor.fetchone()
+    data1 = int(data[1])
+    # print(data)
+    if (data1 < 5):
+        fee = 3000
+    elif (data1 < 8):
+        fee = 5000
+    elif (data1 < 11):
+        fee = 7000
+    else:
+        fee = 10000
+
+    stud_id = int(data[0])
+    date = datetime.now()
+    # print(date)
+    cursor.execute('INSERT INTO fees(amount,stud_id,date) VALUES (% s, % s, % s )', (fee,stud_id,date))
+    mysql.connection.commit()
+    # print(amount)
+    return render_template('payment_method.html',data=data,fee=fee)
+
+@app.route('/proceed_payment')
+def proceed_payment():
+    return render_template('proceed_payment.html')
+
+@app.route('/successful')
+def successful():
+    return render_template('successful.html')
+
+
+
+#Admin stuff
+
+@app.route('/admin_login', methods =['GET', 'POST'])
+def admin_login():
+    msg = ''
+    if request.method == 'POST' and 'email' in request.form and 'password' in request.form:
+        email = request.form['email']
+        password = request.form['password']
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor.execute('SELECT * FROM admin WHERE email = % s AND password = % s', (email, password, ))
+        account = cursor.fetchone()
+        if account:
+            session['loggedin'] = True
+            # session['id'] = account['id']
+            session['email'] = account['email']
+            msg = 'Logged in successfully !'
+            # user=request.form.get('username')
+            return redirect(url_for('admin_dashboard'))
+        else:
+            msg = 'Incorrect email / password !'
+    return render_template('admin_login.html', msg = msg)
+
+@app.route('/admin_logout')
+def admin_logout():
+    session.pop('loggedin', None)
+    session.pop('id', None)
+    session.pop('email', None)
+    return redirect(url_for('admin_login'))
+
+@app.route('/admin_dashboard')
+def admin_dashboard():
+    cursor=mysql.connection.cursor()
+    user=session['email']
+    cursor.execute("select admin_id,admin_name,email from admin where email=%s",(user, ))
+    data= cursor.fetchone()
+    return render_template('admin_dashboard.html',data=data)

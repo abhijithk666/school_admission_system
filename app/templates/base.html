@@ -20,19 +20,20 @@
                         <a class="nav-link text-white" href="{{url_for('index')}}">Home</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link text-white" href="#">About</a>
-                      </li>
-                      <li class="nav-item ">
-                        <a class="nav-link text-white" href="#">Fee Structure</a>
+                        <a class="nav-link text-white" href="{{url_for('login')}}">Student</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link text-white" href="#">Contact Us</a>
+                        <a class="nav-link text-white" href="{{url_for('admin_login')}}">Admin</a>
                       </li>
                       <li class="nav-item">
-                        <!-- <a class="nav-link text-white" href="#">Login</a> -->
-                        <!-- <button type="button" class="btn btn-primary" href="{{url_for('login')}}">Login</button> -->
+                        <a class="nav-link text-white" href="{{url_for('feestructure')}}">FeeStructure</a>
+                      </li>
+                      
+                      <!-- <li class="nav-item">
+                        <a class="nav-link text-white" href="#">Login</a>
+                        <button type="button" class="btn btn-primary" href="{{url_for('login')}}">Login</button>
                         <a class="btn btn-primary" href="{{url_for('login')}}" role="button">Login</a>
-                      </li>
+                      </li> -->
                     </ul>
                 </div>
             </div>

@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>payment</title>
+{% endblock %}
+
+{% block body %}
+
+<div align="center">
+    <div align="center" class="border">
+       <div class="header">
+          <h1 class="word">Payment Page</h1>
+       </div>
+         
+        <div class="row g-3 justify-content-center ">
+            <div class="col-md-6">
+                <div>{{ msg }}</div>
+                <br/>
+                
+                <form class="" action="{{ url_for('payment_method') }}" method="POST">
+                    <div class="d-flex justify-content-center mb-4">
+                        <div class="col-md-3 text-start">
+                            <label for="inputxt" class="form-label ">Student ID:</label>
+                            <input type="text" class="form-control" id="disabledinput" name="studid" value="{{data[0]}}"disabled>
+                        </div>
+                        <div class="col-md-3 text-start">
+                            <label for="inputAmount" class="form-label ">Amount</label>
+                            <input type="text" class="form-control" id="disabledinput" name="amount" value="{{fee}}" disabled>
+                        </div>
+                        <!-- <div class="col-md-3 text-start">
+                            <label for="inputdate" class="form-label ">Date</label>
+                            <input type="date" class="form-control" id="inputdate" name="date" placeholder="Date">
+                        </div> -->
+                        <div class="col-md-4 text-start">
+                            <label for="inputState" class="form-label ">Choose payment method</label>
+                            <select id="inputState" class="form-select" name="pmethod">
+                                <option value="upi">UPI</option>
+                                <option value="online">Online Banking</option>
+                                <option value="debit">Debit/Credit</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="col-md-3 pt-5">
+                <a class="btn btn-primary" href="{{url_for('proceed_payment')}}" role="button">Next</a>
+            </div>
+        </div>
+    </div>
+    <div>
+      <a class="bottom" href="{{url_for('dashboard')}}">Back</a>
+    </div>
+</div>
+
+
+{% endblock %}

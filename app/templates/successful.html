@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>successful</title>
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <h2>Payment Successfull !</h2>
+    <br/>
+    <a class="bottom" href="{{url_for('dashboard')}}">Go to Dashboard</a>
+
+</div>
+{% endblock %}

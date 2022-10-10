@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Feestructure</title>
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <br/>
+    <h1>Fee Structure</h1>
+    <br/>
+    <div class="row">
+        <div class="col-md-5">
+            <div class="d-flex ">
+                <div class="me-4 col-6"><strong>LP Section (1-4):</strong></div><div class="col-6">Rs.3000</div>
+            </div>
+            <div class="d-flex ">
+                <div class="me-4 col-6"><strong>UP Section (5-7):</strong></div><div class="col-6">Rs.5000</div>
+            </div>
+            <div class="d-flex ">
+                <div class="me-4 col-6"><strong>High School (8-10):</strong></div><div class="col-6">Rs.7000</div>
+            </div>
+            <div class="d-flex ">
+                <div class="me-4 col-6"><strong>Higher Secondary (11,12):</strong></div><div class="col-6">Rs.10000</div>
+            </div>
+            <br/>
+            <!-- <div class="col-md-6">
+                <a class="btn btn-primary" href="{{url_for('payment_method')}}" role="button">Next</a>
+            </div> -->
+        </div>
+    </div>
+</div>
+
+{% endblock %}

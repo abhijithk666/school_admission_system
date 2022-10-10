@@ -8,7 +8,7 @@
 
 <div class="container">
     <br/>
-    <h1>Welcome {{ data[1] }} !!!</h1>
+    <h1>Welcome {{ data[1] }} !</h1>
     <br/>
     <div class="row">
         <div class="col-md-5">
@@ -34,7 +34,7 @@
                 <div class="me-4 col-6"><strong>Emergency Contact :</strong></div><div class="col-6">{{ data[6]}}</div>
             </div>
             <div class="d-flex ">
-                <div class="me-4 col-6"><strong>Aademic Year :</strong></div><div class="col-6">{{ data[7]}}</div>
+                <div class="me-4 col-6"><strong>Academic Year :</strong></div><div class="col-6">{{ data[7]}}</div>
             </div>
             <div class="d-flex ">
                 <div class="me-4 col-6"><strong>Father's Name :</strong></div><div class="col-6">{{ data[8]}}</div>
@@ -50,6 +50,14 @@
                 <div class="me-4 col-6"><a class="btn btn-primary" href="{{url_for('documents')}}" role="button">Upload Documents</a></div><div class="me-4 col-6"><a class="btn btn-primary" href="#" role="button">Edit Profile</a></div>
             </div>
             <br/>
+            <!-- {% if msg %}
+
+            <div class="d-flex ">
+                <div class="me-4 col-6"><strong>File upload status :</strong></div><div class="col-6">Uploaded</div>
+            </div>
+            
+
+            {% endif %} -->
             <div class="d-flex ">
                 <div class="col-6"><a class="btn btn-primary" href="{{url_for('logout')}}" role="button">Logout</a></div>
             </div>
